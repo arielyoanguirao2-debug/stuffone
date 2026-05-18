@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
 
 <title>StuffOne</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin
+>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap"
+rel="stylesheet"
+>
 
 <style>
 
@@ -28,30 +42,36 @@ html{
 }
 
 body{
+
   background:#0a0a0a;
+
   color:#f5f5f5;
-  overflow-x:hidden;
+
   font-family:'DM Mono', monospace;
+
+  overflow-x:hidden;
+
 }
 
 /* =========================================
-   TOKENS
+   VARIABLES
 ========================================= */
 
 :root{
 
   --bg:#0a0a0a;
-  --surface:#111111;
+
+  --surface:#121212;
+
   --card:#161616;
 
   --border:rgba(255,255,255,0.06);
 
   --text:#f5f5f5;
-  --muted:#7d7d7d;
+
+  --muted:#7b7b7b;
 
   --accent:#e8ff47;
-
-  --transition:0.22s cubic-bezier(0.4,0,0.2,1);
 
 }
 
@@ -60,132 +80,147 @@ body{
 ========================================= */
 
 .topbar{
+
   position:fixed;
 
   top:0;
   left:0;
 
   width:100%;
-  height:75px;
 
-  padding:0 16px;
+  height:72px;
 
   display:flex;
+
   align-items:center;
-  gap:14px;
 
-  background:rgba(10,10,10,0.82);
+  gap:12px;
 
-  backdrop-filter:blur(16px);
+  padding:0 14px;
+
+  background:rgba(10,10,10,0.84);
+
+  backdrop-filter:blur(18px);
 
   border-bottom:1px solid var(--border);
 
   z-index:1000;
+
 }
 
 /* =========================================
-   BURGER BUTTON
+   BURGER
 ========================================= */
 
 .burger-btn{
+
   width:42px;
   height:42px;
 
+  flex-shrink:0;
+
+  border:none;
+
   border-radius:12px;
+
+  background:#171717;
 
   border:1px solid var(--border);
 
-  background:var(--surface);
-
   display:flex;
+
   align-items:center;
   justify-content:center;
 
   cursor:pointer;
 
-  transition:var(--transition);
-
-  flex-shrink:0;
-}
-
-.burger-btn:hover{
-  background:#1b1b1b;
 }
 
 .burger-lines{
+
   display:flex;
+
   flex-direction:column;
+
   gap:4px;
+
 }
 
 .burger-lines span{
+
   width:16px;
   height:2px;
 
   background:white;
 
   border-radius:999px;
+
 }
 
 /* =========================================
-   SEARCH BAR
+   SEARCH
 ========================================= */
 
 .search{
+
   flex:1;
+
   position:relative;
+
 }
 
 .search input{
+
   width:100%;
+
   height:44px;
 
-  padding-left:46px;
-  padding-right:16px;
+  border:none;
+
+  outline:none;
 
   border-radius:999px;
 
-  background:var(--surface);
+  background:#171717;
 
   border:1px solid var(--border);
 
-  color:var(--text);
+  color:white;
+
+  padding-left:44px;
+
+  padding-right:14px;
 
   font-size:13px;
 
-  transition:var(--transition);
 }
-
-.search input:focus{
-  outline:none;
-
-  border-color:rgba(255,255,255,0.14);
-}
-
-/* =========================================
-   CSS LOUPE
-========================================= */
 
 .search-icon{
+
   position:absolute;
 
   top:50%;
-  left:16px;
+  left:15px;
 
   transform:translateY(-50%);
+
 }
 
 .loupe{
+
   width:14px;
   height:14px;
 
   border:2px solid #777;
+
   border-radius:50%;
 
   position:relative;
+
 }
 
 .loupe::after{
+
   content:"";
 
   position:absolute;
@@ -195,12 +230,13 @@ body{
 
   background:#777;
 
-  bottom:-4px;
   right:-5px;
+  bottom:-3px;
 
   transform:rotate(45deg);
 
   border-radius:999px;
+
 }
 
 /* =========================================
@@ -208,12 +244,16 @@ body{
 ========================================= */
 
 .sidebar{
+
   position:fixed;
 
   top:0;
   left:0;
 
-  width:260px;
+  width:280px;
+
+  max-width:85%;
+
   height:100vh;
 
   background:#0d0d0d;
@@ -222,67 +262,53 @@ body{
 
   z-index:2000;
 
-  transform:translateX(-100%);
-
-  transition:0.35s ease;
-
   padding:22px;
-}
 
-.sidebar.open{
-  transform:translateX(0);
-}
-
-/* =========================================
-   OVERLAY
-========================================= */
-
-.overlay{
-  position:fixed;
-  inset:0;
-
-  background:rgba(0,0,0,0.6);
-
-  opacity:0;
-  visibility:hidden;
+  transform:translateX(-100%);
 
   transition:0.3s ease;
 
-  z-index:1500;
 }
 
-.overlay.active{
-  opacity:1;
-  visibility:visible;
-}
+.sidebar.open{
 
-/* =========================================
-   SIDEBAR CONTENT
-========================================= */
+  transform:translateX(0);
+
+}
 
 .logo{
+
   font-family:'Syne', sans-serif;
 
-  font-size:26px;
+  font-size:28px;
+
   font-weight:800;
 
   margin-bottom:40px;
+
 }
 
 .menu{
+
   display:flex;
+
   flex-direction:column;
+
   gap:12px;
+
 }
 
 .menu button{
+
   width:100%;
 
-  padding:14px;
+  height:48px;
+
+  border:none;
 
   border-radius:14px;
 
-  background:#151515;
+  background:#171717;
 
   border:1px solid var(--border);
 
@@ -290,13 +316,40 @@ body{
 
   text-align:left;
 
+  padding:0 14px;
+
   cursor:pointer;
 
-  transition:var(--transition);
 }
 
-.menu button:hover{
-  background:#1c1c1c;
+/* =========================================
+   OVERLAY
+========================================= */
+
+.overlay{
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,0.6);
+
+  opacity:0;
+
+  visibility:hidden;
+
+  transition:0.3s ease;
+
+  z-index:1500;
+
+}
+
+.overlay.active{
+
+  opacity:1;
+
+  visibility:visible;
+
 }
 
 /* =========================================
@@ -304,7 +357,11 @@ body{
 ========================================= */
 
 main{
-  padding-top:95px;
+
+  padding-top:90px;
+
+  width:100%;
+
 }
 
 /* =========================================
@@ -312,36 +369,49 @@ main{
 ========================================= */
 
 .section{
+
   width:100%;
 
   min-height:100vh;
 
-  padding:40px 24px;
+  padding:24px 16px;
 
-  border-bottom:1px solid rgba(255,255,255,0.04);
 }
 
 /* =========================================
-   SECTION HEADER
+   HEADER
 ========================================= */
 
 .section-header{
-  margin-bottom:32px;
+
+  margin-bottom:28px;
+
 }
 
 .section-title{
+
   font-family:'Syne', sans-serif;
 
-  font-size:42px;
+  font-size:clamp(
+    28px,
+    6vw,
+    48px
+  );
+
   font-weight:800;
 
   margin-bottom:10px;
+
 }
 
 .section-subtitle{
+
   color:var(--muted);
 
   font-size:13px;
+
+  line-height:1.6;
+
 }
 
 /* =========================================
@@ -349,40 +419,44 @@ main{
 ========================================= */
 
 .grid{
+
   display:grid;
 
   grid-template-columns:
-  repeat(auto-fit,minmax(280px,1fr));
+  repeat(
+    auto-fit,
+    minmax(260px,1fr)
+  );
 
-  gap:20px;
+  gap:18px;
+
 }
 
 /* =========================================
-   OLD CARD STYLE
+   CARD
 ========================================= */
 
 .card{
+
   background:#161616;
 
-  border:1px solid rgba(255,255,255,0.06);
+  border:1px solid var(--border);
 
-  border-radius:14px;
+  border-radius:16px;
 
   overflow:hidden;
 
-  transition:0.22s cubic-bezier(0.4,0,0.2,1);
+  transition:0.22s ease;
 
-  position:relative;
 }
 
 .card:hover{
+
   transform:translateY(-3px);
 
-  border-color:rgba(255,255,255,0.15);
+  border-color:
+  rgba(255,255,255,0.12);
 
-  background:#1c1c1c;
-
-  box-shadow:0 16px 40px rgba(0,0,0,0.5);
 }
 
 /* =========================================
@@ -390,59 +464,64 @@ main{
 ========================================= */
 
 .card-image{
+
+  width:100%;
+
   aspect-ratio:16/9;
 
   background:
   radial-gradient(
-  ellipse at 30% 40%,
-  rgba(232,255,71,0.14) 0%,
-  transparent 60%
+    circle at top left,
+    rgba(232,255,71,0.16),
+    transparent 60%
   ),
   #111;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
   position:relative;
 
-  overflow:hidden;
+  cursor:pointer;
+
 }
 
 .card-image::before{
+
   content:"";
 
   position:absolute;
+
   inset:0;
 
   background:
   linear-gradient(
-  rgba(255,255,255,0.04) 1px,
-  transparent 1px),
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px
+  ),
 
   linear-gradient(
-  90deg,
-  rgba(255,255,255,0.04) 1px,
-  transparent 1px);
+    90deg,
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px
+  );
 
   background-size:20px 20px;
+
 }
 
 .card-image span{
+
   font-family:'Syne', sans-serif;
 
-  font-size:42px;
+  font-size:44px;
+
   font-weight:800;
 
   opacity:0.12;
-}
 
-/* =========================================
-   CLICKABLE PREVIEW
-========================================= */
-
-.clickable-preview{
-  cursor:pointer;
 }
 
 /* =========================================
@@ -450,44 +529,62 @@ main{
 ========================================= */
 
 .card-body{
+
   padding:18px;
+
 }
 
 .card-tag{
-  display:inline-block;
 
-  margin-bottom:14px;
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
 
   padding:6px 10px;
 
   border-radius:999px;
 
-  background:rgba(232,255,71,0.08);
+  background:
+  rgba(232,255,71,0.08);
+
+  border:
+  1px solid
+  rgba(232,255,71,0.2);
 
   color:#e8ff47;
 
-  border:1px solid rgba(232,255,71,0.2);
-
   font-size:10px;
 
+  margin-bottom:14px;
+
   text-transform:uppercase;
+
 }
 
 .card-title{
+
   font-family:'Syne', sans-serif;
 
   font-size:20px;
+
   font-weight:700;
 
   margin-bottom:10px;
+
+  word-break:break-word;
+
 }
 
 .card-text{
+
   color:#777;
 
   font-size:12px;
 
   line-height:1.6;
+
 }
 
 /* =========================================
@@ -495,65 +592,80 @@ main{
 ========================================= */
 
 .copy-btn{
-  margin-top:18px;
 
   width:100%;
 
   height:42px;
 
+  margin-top:18px;
+
+  border:none;
+
   border-radius:12px;
 
   background:#1d1d1d;
 
-  border:1px solid rgba(255,255,255,0.06);
+  border:1px solid var(--border);
 
   color:white;
 
   font-family:'DM Mono', monospace;
+
   font-size:11px;
 
   cursor:pointer;
 
-  transition:0.22s cubic-bezier(0.4,0,0.2,1);
-}
-
-.copy-btn:hover{
-  background:#252525;
-
-  border-color:rgba(255,255,255,0.14);
-
-  transform:translateY(-2px);
 }
 
 .copy-btn:active{
+
   transform:scale(0.98);
+
 }
 
 /* =========================================
-   RESPONSIVE
+   MOBILE
 ========================================= */
 
-@media(max-width:700px){
+@media(max-width:500px){
 
-  .section-title{
-    font-size:32px;
+  .section{
+
+    padding:20px 12px;
+
+  }
+
+  .grid{
+
+    grid-template-columns:1fr;
+
   }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- =====================================
+     TOPBAR
+===================================== -->
+
 <header class="topbar">
 
-  <button class="burger-btn" onclick="toggleSidebar()">
+  <button
+  class="burger-btn"
+  onclick="toggleSidebar()"
+  >
 
     <div class="burger-lines">
+
       <span></span>
       <span></span>
       <span></span>
+
     </div>
 
   </button>
@@ -561,17 +673,23 @@ main{
   <div class="search">
 
     <input
-      type="text"
-      placeholder="Rechercher une structure..."
+    type="text"
+    placeholder="Rechercher une structure..."
     >
 
     <div class="search-icon">
+
       <div class="loupe"></div>
+
     </div>
 
   </div>
 
 </header>
+
+<!-- =====================================
+     OVERLAY
+===================================== -->
 
 <div
 class="overlay"
@@ -579,7 +697,14 @@ id="overlay"
 onclick="toggleSidebar()"
 ></div>
 
-<aside class="sidebar" id="sidebar">
+<!-- =====================================
+     SIDEBAR
+===================================== -->
+
+<aside
+class="sidebar"
+id="sidebar"
+>
 
   <div class="logo">
     StuffOne
@@ -587,19 +712,33 @@ onclick="toggleSidebar()"
 
   <div class="menu">
 
-    <button>Toutes les structures</button>
+    <button>
+      Toutes les structures
+    </button>
 
-    <button>Landing Pages</button>
+    <button>
+      Landing Pages
+    </button>
 
-    <button>Dashboards</button>
+    <button>
+      Dashboards
+    </button>
 
-    <button>UI Mobiles</button>
+    <button>
+      UI Mobiles
+    </button>
 
-    <button>Portfolios</button>
+    <button>
+      Portfolios
+    </button>
 
   </div>
 
 </aside>
+
+<!-- =====================================
+     MAIN
+===================================== -->
 
 <main>
 
@@ -612,7 +751,8 @@ onclick="toggleSidebar()"
       </h1>
 
       <p class="section-subtitle">
-        Bibliothèque moderne de structures UI.
+        Bibliothèque moderne
+        de structures UI.
       </p>
 
     </div>
@@ -648,12 +788,19 @@ async function loadStructures(){
     const data =
     await response.json();
 
-    console.log(data);
-
     const grid =
     document.querySelector(".grid");
 
     grid.innerHTML = "";
+
+    if(!Array.isArray(data)){
+
+      grid.innerHTML =
+      "<p>Erreur serveur.</p>";
+
+      return;
+
+    }
 
     if(data.length === 0){
 
@@ -677,66 +824,69 @@ async function loadStructures(){
     data.forEach(structure => {
 
       const title =
-      structure.title || "Sans titre";
+      structure.title ||
+      "Sans titre";
 
       const category =
-      structure.category || "Structure";
+      structure.category ||
+      "Structure";
 
       const id =
       structure.id;
 
       const card =
-      document.createElement("article");
+      document.createElement(
+        "article"
+      );
 
       card.className = "card";
 
       card.innerHTML = `
 
-        <div
-        class="card-image clickable-preview"
-        >
+      <div
+      class="card-image"
+      >
 
-          <span>
-            ${title.charAt(0)}
-          </span>
+        <span>
+          ${title.charAt(0)}
+        </span>
 
+      </div>
+
+      <div class="card-body">
+
+        <div class="card-tag">
+          ${category}
         </div>
 
-        <div class="card-body">
+        <h2 class="card-title">
+          ${title}
+        </h2>
 
-          <div class="card-tag">
-            ${category}
-          </div>
+        <p class="card-text">
+          Structure uploadée
+          sur StuffOne.
+        </p>
 
-          <h2 class="card-title">
-            ${title}
-          </h2>
+        <button class="copy-btn">
+          Copier le code
+        </button>
 
-          <p class="card-text">
-            Structure uploadée
-            sur StuffOne.
-          </p>
-
-          <button
-          class="copy-btn"
-          >
-            Copier le code
-          </button>
-
-        </div>
+      </div>
 
       `;
 
       const preview =
       card.querySelector(
-        ".clickable-preview"
+        ".card-image"
       );
 
       preview.addEventListener(
         "click",
         () => {
 
-          openPreview(id);
+          window.location.href =
+          "preview.html?id=" + id;
 
         }
       );
@@ -748,11 +898,52 @@ async function loadStructures(){
 
       copyBtn.addEventListener(
         "click",
-        (event) => {
+        async (event) => {
 
           event.stopPropagation();
 
-          copyCode(id);
+          try{
+
+            const response =
+            await fetch(
+
+              API_URL +
+              "/structures/" +
+              id +
+              "/code"
+
+            );
+
+            const data =
+            await response.json();
+
+            const fullCode =
+
+            data.html +
+
+            "\n<style>\n" +
+
+            data.css +
+
+            "\n</style>\n" +
+
+            "\n<script>\n" +
+
+            data.js +
+
+            "\n</script>";
+
+            await navigator
+            .clipboard
+            .writeText(fullCode);
+
+            alert("Code copié");
+
+          }catch(error){
+
+            console.log(error);
+
+          }
 
         }
       );
@@ -760,71 +951,6 @@ async function loadStructures(){
       grid.appendChild(card);
 
     });
-
-  }catch(error){
-
-    console.log(
-      "Erreur backend :",
-      error
-    );
-
-  }
-
-}
-
-/* =========================================
-   OPEN PREVIEW
-========================================= */
-
-function openPreview(id){
-
-  window.location.href =
-  "preview.html?id=" + id;
-
-}
-
-/* =========================================
-   COPY CODE
-========================================= */
-
-async function copyCode(id){
-
-  try{
-
-    const response =
-    await fetch(
-
-      API_URL +
-      "/structures/" +
-      id +
-      "/code"
-
-    );
-
-    const data =
-    await response.json();
-
-    const fullCode =
-
-      data.html +
-
-      "\n<style>\n" +
-
-      data.css +
-
-      "\n</style>\n" +
-
-      "\n<script>\n" +
-
-      data.js +
-
-      "\n</script>";
-
-    navigator.clipboard.writeText(
-      fullCode
-    );
-
-    alert("Code copié");
 
   }catch(error){
 
@@ -841,14 +967,22 @@ async function copyCode(id){
 function toggleSidebar(){
 
   const sidebar =
-  document.getElementById("sidebar");
+  document.getElementById(
+    "sidebar"
+  );
 
   const overlay =
-  document.getElementById("overlay");
+  document.getElementById(
+    "overlay"
+  );
 
-  sidebar.classList.toggle("open");
+  sidebar.classList.toggle(
+    "open"
+  );
 
-  overlay.classList.toggle("active");
+  overlay.classList.toggle(
+    "active"
+  );
 
 }
 
